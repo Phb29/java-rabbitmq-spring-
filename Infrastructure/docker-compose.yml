@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgress-barbearia:
+    image: postgres
+    hostname: postgres-barbearia
+    environment:
+      POSTGRES_DB: barbearia
+      POSTGRES_USER: barbearia
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - 'C:\Users\Meu Computador\Desktop\paulo-barbearia-Spring\db-barbearia-paulo:/var/lib/postgresql/data'
+      -  'C:/Users/Meu Computador/Desktop/paulo-barbearia-Spring/Infrastructure/init-barbearia-schema.sql:/docker-entrypoint-initdb.d/init-barbearia-schema.sql'
+    ports:
+      - '3334:5432'
+    networks:
+      - barbearia-network
+
+networks:
+  barbearia-network:
+    driver: bridge

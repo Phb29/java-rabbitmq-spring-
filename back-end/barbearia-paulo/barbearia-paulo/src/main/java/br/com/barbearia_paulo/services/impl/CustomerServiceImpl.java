@@ -8,6 +8,8 @@ import br.com.barbearia_paulo.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl  implements CustomerService {
 
@@ -39,6 +41,30 @@ return  convertUtil.convertToTarget(savedCustomer);
           .build();
 */
 
+
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<CustomEntity> customEntity= customerRepository.findById(id);
+
+        if(customEntity.isEmpty()){
+            throw new RuntimeException("Customer not found");
+        }
+        customerRepository.delete(customEntity.get());
+    }
+
+    @Override
+    public CustomerDTO update(CustomerDTO customerDTO) {
+ Optional<CustomEntity> customEntity= customerRepository.findById(customerDTO.getId());
+ if(customEntity.isEmpty()){
+     throw new RuntimeException("Customer not found");
+ }
+ CustomEntity customEntityToUpdate = convertUtil.convertToSource(customerDTO);
+        customEntityToUpdate.setAppointments(customEntity.get().getAppointments());
+        customEntityToUpdate.setCreated(customEntity.get().getCreated());
+
+        return convertUtil.convertToTarget(customerRepository.save(customEntityToUpdate));
 
     }
 }

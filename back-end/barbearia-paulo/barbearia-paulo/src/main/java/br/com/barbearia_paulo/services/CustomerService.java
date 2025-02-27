@@ -5,4 +5,6 @@ import br.com.barbearia_paulo.entities.CustomEntity;
 
 public interface CustomerService {
     CustomerDTO create(CustomerDTO customEntity);
+    void delete(Long id);
+    CustomerDTO update(CustomerDTO customerDTO);
 }

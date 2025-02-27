@@ -5,10 +5,7 @@ import br.com.barbearia_paulo.entities.CustomEntity;
 import br.com.barbearia_paulo.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;  // Adicionar isso
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
@@ -20,5 +17,16 @@ public class CustomerController {
     @PostMapping
     ResponseEntity<CustomerDTO> create(@RequestBody CustomerDTO customEntity) {  // Modificar o parâmetro
         return ResponseEntity.ok(customerService.create(customEntity));
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> delte(@PathVariable Long id) {
+        customerService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping()
+    ResponseEntity<CustomerDTO> update(@RequestBody CustomerDTO customerDto) {
+        return ResponseEntity.ok(customerService.update(customerDto));
     }
 }

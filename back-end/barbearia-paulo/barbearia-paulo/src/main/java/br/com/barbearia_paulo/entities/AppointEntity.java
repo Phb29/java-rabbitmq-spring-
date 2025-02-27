@@ -12,7 +12,7 @@ import java.time.LocalDateTime;  // Importa a classe LocalDateTime para manipula
 @Entity  // Indica que essa classe é uma entidade JPA (vai ser mapeada para uma tabela no banco)
 @Builder  // Permite usar o padrão de design "Builder" para criar instâncias dessa classe de forma fluída
 @Table(name = "appointments")  // Define o nome da tabela no banco de dados, que será "appointments"
-public class AppointEntity extends BaseEntity {  // Extende a classe BaseEntity (que provavelmente contém ID e timestamps)
+public class    AppointEntity extends BaseEntity {  // Extende a classe BaseEntity (que provavelmente contém ID e timestamps)
 
     @Column(nullable = false, updatable = true)  // Define a coluna como não-nula e atualizável
     private LocalDateTime dateTime;  // A data e hora do agendamento

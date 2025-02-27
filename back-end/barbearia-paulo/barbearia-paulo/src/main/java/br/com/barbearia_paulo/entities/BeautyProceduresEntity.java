@@ -27,4 +27,10 @@ public class BeautyProceduresEntity extends BaseEntity {
 
     @Column(nullable = false)
     private BigDecimal price;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "beautyProcedure", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<AppointEntity> appointments;
 }
